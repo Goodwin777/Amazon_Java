@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class FirstTest {
+
     @Test
     public void firstTest() {
         ChromeDriver driver = new ChromeDriver();
@@ -26,8 +27,7 @@ public class FirstTest {
         price.click();
         WebElement setQnt = driver.findElement(By.id("a-autoid-9"));
         setQnt.click();
-        driver.findElement(By.linkText("2")).click();
-
+        driver.findElement(By.linkText("1")).click();
         WebElement AddToCart = driver.findElement(By.name("submit.addToCart"));
         AddToCart.click();
 //4.Open cart and assert total price and quantity are correct
