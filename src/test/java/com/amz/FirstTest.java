@@ -1,4 +1,4 @@
-package ru.deliveryClub;
+package com.amz;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
