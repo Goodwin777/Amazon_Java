@@ -1,6 +1,8 @@
 package com.amz;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -10,17 +12,22 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 public class FirstTest {
-    public void setup() {
+    public ChromeDriver driver;
 
-    }
-    @Test
-    public void firstTest() {
-        ChromeDriver driver = new ChromeDriver();
-        System.setProperty("webdriver.chrome.driver", "/driver/chromedriver");
+    @Before
+    public void setUp() {
+
+        System.setProperty("webdriver.chrome.driver", "./driver/chromedriver");
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 //1. Go to https://www.amazon.com
         driver.get("https://www.amazon.com");
         driver.manage().window().maximize();
+
+    }
+
+    @Test
+    public void firstTest() {
         WebElement search_box = driver.findElement(By.id("twotabsearchtextbox"));
 //2. Search for "hats for men"
         search_box.sendKeys("hats for men");
@@ -41,13 +48,18 @@ public class FirstTest {
         }
         WebElement AddToCart = driver.findElement(By.id("add-to-cart-button"));
         AddToCart.click();
-
-
 //4.Open cart and assert total price and quantity are correct
         String number_of_goods = driver.findElement(By.id("nav-cart-count")).getText();
         System.out.println("There are " + number_of_goods + " of goods...");
         Assert.assertEquals(number_of_goods, "2");
-        driver.quit();
+
     }
 
+
+
+    @After
+    public void closed() {
+        driver.quit();
+
+    }
 }
